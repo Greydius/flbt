@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+    $response = Telegram::getMe();
+    $botId = $response->getId();
+    $firstName = $response->getFirstName();
+    $username = $response->getUsername();
+    return [
+        $botId, $firstName, $username
+    ];
+});
