@@ -17,12 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/<token>/webhook', function() {
+    Telegram::commandsHandler(true);
+
+    $updates = Telegram::getWebhookUpdates();
+
+    Log::info($updates);
+
+    return 'ok';
+});
+
 Route::get('/test', function () {
-    $response = Telegram::getMe();
-    $botId = $response->getId();
-    $firstName = $response->getFirstName();
-    $username = $response->getUsername();
-    return [
-        $botId, $firstName, $username
-    ];
+    $response = Telegram::getUpdates();
+
+    return $response;
 });
