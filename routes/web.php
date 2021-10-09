@@ -16,19 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::post('/<token>/webhook', function() {
-    Telegram::commandsHandler(true);
-
-    $updates = Telegram::getWebhookUpdates();
-
-    Log::info($updates);
-
-    return 'ok';
-});
-
-Route::get('/test', function () {
-    $response = Telegram::getUpdates();
-
-    return $response;
-});

@@ -16,7 +16,7 @@ class CreateExchangesTable extends Migration
         Schema::create('exchanges', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->constrained('clients');
-            $table->foreignId('buyer_id')->constrained('clients');
+            $table->foreignId('buyer_id')->constrained('clients')->nullable();
 
             $table->foreignId('coin_id')->constrained();
             $table->foreignId('fiat_id')->constrained();
@@ -25,6 +25,8 @@ class CreateExchangesTable extends Migration
             $table->double('fiat_value', 30, 2);
             $table->enum('type', ['sell', 'buy']);
             $table->enum('status', ['open', 'proccess', 'done', 'error']);
+            $table->string('fiat_address');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

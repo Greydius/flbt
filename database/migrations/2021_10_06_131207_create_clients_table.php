@@ -16,10 +16,11 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('tg_id')->unique();
-            $table->string('login')->unique();
-            $table->string('password');
-            $table->string('phone')->unique();
-            $table->enum('lang', ['ru', 'en', 'uz']);
+            $table->string('login')->nullable()->unique();
+            $table->string('password')->nullable();
+            $table->string('phone')->nullable()->unique();
+            $table->enum('lang', ['ru', 'en', 'uz'])->nullable();
+            $table->string('last_position')->nullable();
             $table->timestamps();
         });
     }
